@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>welcome to mongodb</title>
+    <style type="text/css">
+      h5{display:inline;}
+    </style>
+  </head>
+  <body>
+    <h1>welcome to mongodb</h1>
+    <form method="post" class="form" action="/newguest">
+      Name:<input type="text" name="name"/>
+      Email:<input type="text" name="email"/>
+      <input type="submit" value="Add Guest"/>
+    </form>
+    <div class="guestbook">
+      <h3>Guests:</h3>
+      %for name in mynames:
+      <div class="name">
+        <h5>Name:</h5>{{name['name']}},
+        <h5>Email:</h5>{{name['email']}}
+      </div>
+      %end
+      <address>
+        <a href="mailto:z@zpc">z</a>
+      </address>
+  </body>
+</html>
