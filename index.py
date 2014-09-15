@@ -19,6 +19,10 @@ def insert_newguest():
     guestbook.insert_name(name,email)
     bottle.redirect('/')
 
+@bottle.route('/delete/:id',method='GET')
+def delete_guest(id):
+    guestbook.delete_names(id)
+    bottle.redirect('/')
 
 bottle.debug(True)
 bottle.run(host='localhost',port=8080)

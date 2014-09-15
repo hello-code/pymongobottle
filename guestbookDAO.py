@@ -14,3 +14,7 @@ class GuestbookDAO(object):
     def insert_name(self,newname,newemail):
         newname={'name':newname,'email':newemail}
         self.mynames.insert(newname)
+
+    def delete_names(self,id):
+        did={'_id':ObjectId(id)}# id未加引号？
+        self.mynames.remove(did)

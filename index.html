@@ -3,11 +3,17 @@
   <head>
     <title>welcome to mongodb</title>
     <style type="text/css">
-    h5{display:inline;}
+    .todo{float:left;margin-right:2em;}
     </style>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   </head>
   <body>
     <h1>welcome to mongodb</h1>
+    <ul class="todo">
+      <li>Delete</li>
+      <li>Count</li>
+      <li></li>
+    </ul>
     <form method="post" class="form" action="/newguest">
       Name:<input type="text" name="name"/>
       Email:<input type="text" name="email"/>
@@ -20,6 +26,7 @@
           <th>Id</th>
           <th>Name</th>
           <th>Email</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -28,9 +35,26 @@
           <td>{{name['id']}}</td>
           <td>{{name['name']}}</td>
           <td>{{name['email']}}</td>
+          <td><a href="/delete">Del</a></td>
         </tr>
         %end
       </tbody>
     </table>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('a').click(function(){
+      var row=$(this).closest('tr');
+      var cell = row.find("td:nth-child(1)").text();
+      alert(cell);
+      $.ajax({
+        url:'/delete',
+        data:{id:cell},
+        type:'GET',
+        dataType:'json'
+      });
+      return false;
+    })
+  });
+</script>
   </body>
 </html>
