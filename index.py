@@ -2,6 +2,11 @@ import bottle
 import pymongo
 import guestbookDAO
 
+connection_string="mongodb://localhost"
+connection=pymongo.MongoClient(connection_string)
+database=connection.names
+guestbook=guestbookDAO.GuestbookDAO(database)
+
 @bottle.route('/')
 def guestbook_index():
     mynames_list=guestbook.find_names()
@@ -14,10 +19,6 @@ def insert_newguest():
     guestbook.insert_name(name,email)
     bottle.redirect('/')
 
-connection_string="mongodb://localhost"
-connection=pymongo.MongoClient(connection_string)
-database=connection.names
-guestbook=guestbookDAO.GuestbookDAO(database)
 
 bottle.debug(True)
 bottle.run(host='localhost',port=8080)

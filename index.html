@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>welcome to mongodb</title>
     <style type="text/css">
-      h5{display:inline;}
+    h5{display:inline;}
     </style>
   </head>
   <body>
@@ -12,16 +13,24 @@
       Email:<input type="text" name="email"/>
       <input type="submit" value="Add Guest"/>
     </form>
-    <div class="guestbook">
-      <h3>Guests:</h3>
-      %for name in mynames:
-      <div class="name">
-        <h5>Name:</h5>{{name['name']}},
-        <h5>Email:</h5>{{name['email']}}
-      </div>
-      %end
-      <address>
-        <a href="mailto:z@zpc">z</a>
-      </address>
+    <h3>Guests:</h3>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        %for name in mynames:
+        <tr>
+          <td>{{name['id']}}</td>
+          <td>{{name['name']}}</td>
+          <td>{{name['email']}}</td>
+        </tr>
+        %end
+      </tbody>
+    </table>
   </body>
 </html>

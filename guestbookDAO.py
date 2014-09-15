@@ -8,7 +8,7 @@ class GuestbookDAO(object):
     def find_names(self):
         l=[]
         for each_name in self.mynames.find():
-            l.append({'name':each_name['name'],'email':each_name['email']})
+            l.append({'id':each_name['_id'],'name':each_name['name'],'email':each_name['email']})
         return l
 
     def insert_name(self,newname,newemail):
