@@ -12,14 +12,14 @@
     <ul class="todo">
       <li>Delete</li>
       <li>Count</li>
-      <li></li>
+      <li>Edit</li>
     </ul>
     <form method="post" class="form" action="/newguest">
       Name:<input type="text" name="name"/>
       Email:<input type="text" name="email"/>
       <input type="submit" value="Add Guest"/>
     </form>
-    <h3>Guests:</h3>
+    <h3>Guests:{{count}}</h3>
     <table border="1">
       <thead>
         <tr>
@@ -35,7 +35,7 @@
           <td>{{name['id']}}</td>
           <td>{{name['name']}}</td>
           <td>{{name['email']}}</td>
-          <td><a href="/delete">Del</a></td>
+          <td><a href="#">Del</a></td>
         </tr>
         %end
       </tbody>
@@ -47,12 +47,11 @@
       var cell = row.find("td:nth-child(1)").text();
       alert(cell);
       $.ajax({
-        url:'/delete',
-        data:{id:cell},
-        type:'GET',
-        dataType:'json'
+        type:'POST',
+        url:'/delete/'+cell,
+        data:{id:cell}
       });
-      return false;
+      $('body').load('/');
     })
   });
 </script>

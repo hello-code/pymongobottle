@@ -1,4 +1,5 @@
 import string
+from bson.objectid import ObjectId # delete use id
 
 class GuestbookDAO(object):
     def __init__(self,database):
@@ -11,10 +12,13 @@ class GuestbookDAO(object):
             l.append({'id':each_name['_id'],'name':each_name['name'],'email':each_name['email']})
         return l
 
+    def count_names(self):
+        return self.mynames.count() # return a number
+
     def insert_name(self,newname,newemail):
         newname={'name':newname,'email':newemail}
         self.mynames.insert(newname)
 
     def delete_names(self,id):
-        did={'_id':ObjectId(id)}# id未加引号？
-        self.mynames.remove(did)
+        id={'_id':ObjectId(id)}
+        self.mynames.remove(id)

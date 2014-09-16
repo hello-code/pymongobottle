@@ -10,7 +10,8 @@ guestbook=guestbookDAO.GuestbookDAO(database)
 @bottle.route('/')
 def guestbook_index():
     mynames_list=guestbook.find_names()
-    return bottle.template('index',dict(mynames=mynames_list))
+    mynames_count=guestbook.count_names()
+    return bottle.template('index',dict(mynames=mynames_list,count=mynames_count))
 
 @bottle.route('/newguest',method='POST')
 def insert_newguest():
@@ -19,10 +20,10 @@ def insert_newguest():
     guestbook.insert_name(name,email)
     bottle.redirect('/')
 
-@bottle.route('/delete/:id',method='GET')
+@bottle.route('/delete/:id',method='POST')
 def delete_guest(id):
     guestbook.delete_names(id)
-    bottle.redirect('/')
+    #bottle.redirect('/')        # since ansyn so not working
 
 bottle.debug(True)
 bottle.run(host='localhost',port=8080)
